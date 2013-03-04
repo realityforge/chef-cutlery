@@ -34,7 +34,7 @@ class ::Chef #nodoc
           if value
             existing = output_path.split('.').inject(node) { |element, key| element[key] }
             if existing
-              results = ::Chef::Mixin::DeepMerge.deep_merge(value, existing.to_hash, {:preserve_unmergeables => false}).to_hash
+              results = ::Chef::Mixin::DeepMerge.deep_merge(value, existing.to_hash).to_hash
             else
               results = value.dup
             end
