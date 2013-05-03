@@ -12,7 +12,7 @@
 # limitations under the License.
 #
 
-class ::Chef #nodoc
+class Chef #nodoc
   module SearchBlender #nodoc
     class << self
       # Search an index on the chef server, using a particular search query. For each result returned,
