@@ -28,9 +28,10 @@ class Chef #nodoc
       # * +options+:: The set of optional parameters to pass. Currently only the 'sort' key is used and it defaults to 'X_CHEF_id_CHEF_X asc'.
       def blend_search_results_into_node(node, search_key, query, input_path, output_path, options = {})
         sort_key = options['sort'] || 'X_CHEF_id_CHEF_X asc'
+        partial_search_keys = {'output' => input_path.split('.')}
 
-        ::Chef::Search::Query.new.search(search_key, query, sort_key) do |config|
-          value = input_path.split('.').inject(config) { |element, key| element.nil? ? nil : element[key] }
+        ::Chef::PartialSearch.new.search(search_key, query, :keys => partial_search_keys, :sort => sort_key) do |config|
+          value = config['output']
           if value
             existing = output_path.split('.').inject(node.override) { |element, key| element[key] }
             if existing

@@ -1,3 +1,8 @@
+## 0.2.6:
+
+* Update `Chef::SearchBlender.blend_search_results_into_node`
+  to use partial search where available.
+
 ## 0.2.2:
 
 * Add utility method to blend attribute value into path via
