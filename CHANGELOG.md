@@ -1,5 +1,7 @@
 ## 0.2.6:
 
+* Add a utility method to ensure attributes are present. i.e.
+  `Chef::AttributeChecker.ensure_attribute(node, 'iris.version')`
 * Add a utility class for accessing configuration for "services".
   Useful for storing configuration in a node or data bags as a
   poor mans service registry.
