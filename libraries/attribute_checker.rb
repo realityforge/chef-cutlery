@@ -18,12 +18,18 @@ class Chef #nodoc
       # Ensure attribute is present.
       #
       # = Parameters
-      # * +node+:: The node into which the results will be set.
-      # * +key+:: The path on the node on which to set value.
-      def ensure_attribute(node, key)
+      # * +root_element+:: The root element used to base lookup on. Often a node element.
+      # * +key+:: The path to lookup.
+      # * +type+:: The expected type of the value, Set to nil to ignore type checking.
+      # * +prefix+:: The prefix already traversed to get to root.
+      def ensure_attribute(root_element, key, type = nil, prefix = nil)
         key_parts = key.split('.')
-        output_entry = key_parts[0...-1].inject(node.override) { |element, k| element[k] }
-        raise "Missing config #{key}" unless output_entry[key_parts.last]
+        output_entry = key_parts[0...-1].inject(root_element) { |element, k| element[k] }
+        value = output_entry[key_parts.last]
+        label = prefix ? "#{prefix}.#{key}" : key
+        raise "Attribute '#{label}' is missing" unless value
+        raise "The value of attribute '#{label}' is '#{value.inspect}' and this is not of the expected type #{type.inspect}" if type && !value.is_a?(type)
+        value
       end
     end
   end
