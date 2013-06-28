@@ -25,7 +25,7 @@ class Chef #nodoc
       def ensure_attribute(root_element, key, type = nil, prefix = nil)
         key_parts = key.split('.')
         output_entry = key_parts[0...-1].inject(root_element) { |element, k| element[k] }
-        value = output_entry[key_parts.last]
+        value = output_entry ? output_entry[key_parts.last] : nil
         label = prefix ? "#{prefix}.#{key}" : key
         raise "Attribute '#{label}' is missing" unless value
         raise "The value of attribute '#{label}' is '#{value.inspect}' and this is not of the expected type #{type.inspect}" if type && !value.is_a?(type)
