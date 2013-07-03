@@ -1,3 +1,5 @@
+## 0.2.7:
+
 ## 0.2.6:
 
 * Extract attribute related helpers into the class
