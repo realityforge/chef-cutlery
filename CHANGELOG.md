@@ -1,5 +1,7 @@
 ## 0.2.6:
 
+* Extract attribute related helpers into the class
+  RealityForge::AttributeTools and deprecate the old versions.
 * Add a utility method to ensure attributes are present. i.e.
   `Chef::AttributeChecker.ensure_attribute(node, 'iris.version')`
 * Add a utility class for accessing configuration for "services".

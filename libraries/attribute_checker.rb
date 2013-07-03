@@ -23,13 +23,8 @@ class Chef #nodoc
       # * +type+:: The expected type of the value, Set to nil to ignore type checking.
       # * +prefix+:: The prefix already traversed to get to root.
       def ensure_attribute(root_element, key, type = nil, prefix = nil)
-        key_parts = key.split('.')
-        output_entry = key_parts[0...-1].inject(root_element) { |element, k| element[k] }
-        value = output_entry ? output_entry[key_parts.last] : nil
-        label = prefix ? "#{prefix}.#{key}" : key
-        raise "Attribute '#{label}' is missing" unless value
-        raise "The value of attribute '#{label}' is '#{value.inspect}' and this is not of the expected type #{type.inspect}" if type && !value.is_a?(type)
-        value
+        puts "WARNING: Invoking deprecated Chef::AttributeChecker.ensure_attribute - use RealityForge::AttributeTools.ensure_attribute instead."
+        RealityForge::AttributeTools.ensure_attribute(root_element, key, type, prefix)
       end
     end
   end

@@ -31,16 +31,7 @@ class Chef #nodoc
         partial_search_keys = {'output' => input_path.split('.')}
 
         ::Chef::PartialSearch.new.search(search_key, query, :keys => partial_search_keys, :sort => sort_key) do |config|
-          value = config['output']
-          if value
-            existing = output_path.split('.').inject(node.override) { |element, key| element[key] }
-            if existing
-              results = ::Chef::Mixin::DeepMerge.deep_merge(value, existing.to_hash).to_hash
-            else
-              results = value.dup
-            end
-            Chef::AttributeBlender.blend_attribute_into_node(node, output_path, results)
-          end
+          RealityForge::AttributeTools.deep_merge(node, output_path, config['output'])
         end
       end
     end
