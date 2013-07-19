@@ -1,5 +1,7 @@
 ## 0.2.7:
 
+* Add utility method RealityForge::SearchTools.search_and_deep_merge
+  to merge a search result into a hash and return it.
 * Add support for passing Mash instances into deep_merge and
   ensure_attribute methods of RealityForge::AttributeTools
 * Add support for setting values into Mash values via
