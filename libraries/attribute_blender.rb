@@ -22,8 +22,8 @@ class Chef #nodoc
       # * +key+:: The path on the node on which to set value.
       # * +value+:: The value to set.
       def blend_attribute_into_node(node, key, value)
-        puts "WARNING: Invoking deprecated Chef::AttributeBlender.blend_attribute_into_node - use RealityForge::AttributeTools.set_attribute_on_node instead."
-        RealityForge::AttributeTools.set_attribute_on_node(node, key, value)
+        puts "WARNING: Invoking deprecated Chef::AttributeBlender.blend_attribute_into_node - use RealityForge::AttributeTools.set_attribute instead."
+        RealityForge::AttributeTools.set_attribute(node, key, value)
       end
     end
   end

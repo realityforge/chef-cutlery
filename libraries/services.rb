@@ -23,7 +23,7 @@ class Chef #nodoc
       # * +value+:: The service configuration data.
       def register(node, key, value, options = {})
         service_type = options[:type] || 'services'
-        RealityForge::AttributeTools.set_attribute_on_node(node, "#{service_type}.#{key}", value)
+        RealityForge::AttributeTools.set_attribute(node, "#{service_type}.#{key}", value)
       end
 
       # Lookup a service configuration.

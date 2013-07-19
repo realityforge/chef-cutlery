@@ -50,6 +50,19 @@ class RealityForge #nodoc
         value
       end
 
+      # Set attribute value on mash using a path. If the element is a node then use override priority.
+      #
+      # = Parameters
+      # * +element+:: The mash/node into which the results will be set.
+      # * +key+:: The path on the node on which to set value.
+      # * +value+:: The value to set.
+      def set_attribute(root_element, key, value)
+        key_parts = key.nil? ? [] : key.split('.')
+        base = root_element.respond_to?(:override) ? root_element.override : root_element
+        output_entry = key_parts[0...-1].inject(base) { |element, k| element[k] }
+        output_entry[key_parts.last] = value
+      end
+
       # Set attribute value on node using a path.
       #
       # = Parameters
@@ -57,9 +70,8 @@ class RealityForge #nodoc
       # * +key+:: The path on the node on which to set value.
       # * +value+:: The value to set.
       def set_attribute_on_node(node, key, value)
-        key_parts = key.split('.')
-        output_entry = key_parts[0...-1].inject(node.override) { |element, k| element[k] }
-        output_entry[key_parts.last] = value
+        puts "WARNING: Invoking deprecated RealityForge::AttributeTools.set_attribute_on_node - use RealityForge::AttributeTools.set_attribute instead."
+        set_attribute(node, key, value)
       end
     end
   end

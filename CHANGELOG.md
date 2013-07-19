@@ -1,5 +1,9 @@
 ## 0.2.7:
 
+* Add support for setting values into Mash values via
+  `RealityForge::AttributeTools.set_attribute` and deprecate
+  `RealityForge::AttributeTools.set_attribute_on_node`.
+
 ## 0.2.6:
 
 * Extract attribute related helpers into the class
