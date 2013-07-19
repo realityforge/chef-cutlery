@@ -1,5 +1,7 @@
 ## 0.2.7:
 
+* Add support for passing Mash instances into deep_merge and
+  ensure_attribute methods of RealityForge::AttributeTools
 * Add support for setting values into Mash values via
   `RealityForge::AttributeTools.set_attribute` and deprecate
   `RealityForge::AttributeTools.set_attribute_on_node`.
