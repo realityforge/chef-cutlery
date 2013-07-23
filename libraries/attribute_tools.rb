@@ -44,14 +44,30 @@ class RealityForge #nodoc
       # * +type+:: The expected type of the value, Set to nil to ignore type checking.
       # * +prefix+:: The prefix already traversed to get to root.
       def ensure_attribute(root_element, key, type = nil, prefix = nil)
-        key_parts = key.split('.')
-        output_entry = key_parts[0...-1].inject(root_element.to_hash) { |element, k| element.nil? ? nil : element[k] }
-        value = output_entry ? output_entry[key_parts.last] : nil
+        value = get_attribute(root_element, key, type, prefix)
         label = prefix ? "#{prefix}.#{key}" : key
         raise "Attribute '#{label}' is missing" unless value
+        value
+      end
+
+      # Get attribute if present.
+      #
+      # = Parameters
+      # * +root_element+:: The root element used to base lookup on. Often a node element.
+      # * +key+:: The path to lookup.
+      # * +type+:: The expected type of the value, Set to nil to ignore type checking.
+      # * +prefix+:: The prefix already traversed to get to root.
+      def get_attribute(root_element, key, type = nil, prefix = nil)
+        key_parts = key.split('.')
+        output_entry = key_parts[0...-1].inject(root_element.to_hash) { |element, k| element.nil? ? nil : element[k] }
+        return nil unless output_entry
+        value = output_entry[key_parts.last]
+        return nil unless value
+        label = prefix ? "#{prefix}.#{key}" : key
         raise "The value of attribute '#{label}' is '#{value.inspect}' and this is not of the expected type #{type.inspect}" if type && !value.is_a?(type)
         value
       end
+
 
       # Set attribute value on mash using a path. If the element is a node then use override priority.
       #
