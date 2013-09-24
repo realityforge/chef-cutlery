@@ -50,25 +50,30 @@ class Chef #nodoc
       #               +:optional+ (true | false) :: If true raise an exception if a service can not be found.
       #               +:type+ (String) :: The service type. Defaults to 'services'.
       #               +:scope+ (:all | :node | :environment) :: If the scope is :environment then the service must be in the same environment, if the scope is :node it must be registered on the same node otherwise it can be anywhere.
+      #               +:environment+ (String) :: The environment in which to search for the service. Not allowed if scope = :node.
       def lookup(node, key, options = {})
 
         service_type = options[:type] || 'services'
 
         return node[service_type][key].to_hash if node[service_type] && node[service_type][key]
 
-        scope = options[:scope] || :all
+        # Scope defaults to :all, or to :environment if options[:environment] has been supplied
+        scope = options[:scope] || ( options[:environment] ? :environment : :all )
         raise "Unknown scope #{scope.inspect}" unless [:environment, :node, :all].include?(scope)
+        raise "Scope set to :node and environment has been specified - this doesn't make sense" if ( :node == scope && options[:environment] )
+
+        environment = options[:environment] || node.chef_environment
 
         unless :node == scope
           partial_search_keys = {'fqdn' => ['fqdn'], key => [service_type, key]}
 
-          result = Chef::PartialSearch.new.search(:node, "#{service_type}_#{key}*:* AND chef_environment:#{node.chef_environment} AND NOT name:#{node.name}", :keys => partial_search_keys)[0]
+          result = Chef::PartialSearch.new.search(:node, "#{service_type}_#{key}*:* AND chef_environment:#{environment} AND NOT name:#{node.name}", :keys => partial_search_keys)[0]
           return result[0][key] if 1 == result.length
-          raise "Duplicate service of type '#{service_type}' for key '#{key}' registered in environment #{node.chef_environment}. Found in nodes #{result.collect { |n| n['fqdn'] }}" if result.length > 1
+          raise "Duplicate service of type '#{service_type}' for key '#{key}' registered in environment #{environment}. Found in nodes #{result.collect { |n| n['fqdn'] }}" if result.length > 1
 
-          result = Chef::Search::Query.new.search(service_type, "type:#{key} AND chef_environment:#{node.chef_environment}")[0]
+          result = Chef::Search::Query.new.search(service_type, "type:#{key} AND chef_environment:#{environment}")[0]
           return result[0]['config'] if 1 == result.length
-          raise "Duplicate service of type '#{service_type}' for key '#{key}' registered in data bag in environment #{node.chef_environment}. Found in items #{result.collect { |n| n['id'] }}" if result.length > 1
+          raise "Duplicate service of type '#{service_type}' for key '#{key}' registered in data bag in environment #{environment}. Found in items #{result.collect { |n| n['id'] }}" if result.length > 1
 
           unless :environment == scope
             result = Chef::PartialSearch.new.search(:node, "#{service_type}_#{key}*:* AND NOT name:#{node.name}", :keys => partial_search_keys)[0]
@@ -77,7 +82,7 @@ class Chef #nodoc
 
             result = Chef::Search::Query.new.search(service_type, "type:#{key} AND NOT chef_environment:*")[0]
             return result[0]['config'] if 1 == result.length
-            raise "Duplicate service of type '#{service_type}' for key '#{key}' registered in data bag in environment #{node.chef_environment}. Found in items #{result.collect { |n| n['id'] }}" if result.length > 1
+            raise "Duplicate service of type '#{service_type}' for key '#{key}' registered in data bag in environment #{environment}. Found in items #{result.collect { |n| n['id'] }}" if result.length > 1
           end
         end
 
