@@ -12,27 +12,28 @@
 # limitations under the License.
 #
 
-class Chef #nodoc
-  module SearchBlender #nodoc
+class RealityForge #nodoc
+  module SearchTools #nodoc
     class << self
+
       # Search an index on the chef server, using a particular search query. For each result returned,
-      # extract the data from the input path in the result and deep merge data into the output path of the node
-      # using the override priority.
+      # extract the data from the input path in the result and deep merge data into a mash. Return the Mash.
       #
       # = Parameters
-      # * +node+:: The node into which the results will be deep merged.
       # * +search_key+:: The name of the index that is searched on the chef server.
       # * +query+:: The query to use when searching the index.
       # * +input_path+:: The path to traverse in the search result. The path elements are separated using a '.' character.
-      # * +output_path+:: The path on the node on which to deep merge the results.
       # * +options+:: The set of optional parameters to pass. Currently only the 'sort' key is used and it defaults to 'X_CHEF_id_CHEF_X asc'.
-      def blend_search_results_into_node(node, search_key, query, input_path, output_path, options = {})
+      def search_and_deep_merge(search_key, query, input_path, options = {})
         sort_key = options['sort'] || 'X_CHEF_id_CHEF_X asc'
         partial_search_keys = {'output' => input_path.split('.')}
 
+        mash = Mash.new
         ::Chef::PartialSearch.new.search(search_key, query, :keys => partial_search_keys, :sort => sort_key) do |config|
-          RealityForge::AttributeTools.deep_merge(node, output_path, config['output'])
+          RealityForge::AttributeTools.deep_merge(mash, input_path, config['output'])
         end
+
+        mash
       end
     end
   end
