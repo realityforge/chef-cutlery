@@ -12,7 +12,7 @@ Cutlery is a cookbook containing a collection useful library code.
 
 ## Cookbooks:
 
-*No dependencies defined*
+* partial_search
 
 # Attributes
 
