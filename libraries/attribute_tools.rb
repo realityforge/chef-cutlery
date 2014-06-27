@@ -46,7 +46,7 @@ class RealityForge #nodoc
       def ensure_attribute(root_element, key, type = nil, prefix = nil)
         value = get_attribute(root_element, key, type, prefix)
         label = prefix ? "#{prefix}.#{key}" : key
-        raise "Attribute '#{label}' is missing" unless value
+        raise "Attribute '#{label}' is missing" if value.nil?
         value
       end
 
@@ -62,7 +62,7 @@ class RealityForge #nodoc
         output_entry = key_parts[0...-1].inject(root_element.to_hash) { |element, k| element.nil? ? nil : element[k] }
         return nil unless output_entry
         value = output_entry[key_parts.last]
-        return nil unless value
+        return nil if value.nil?
         label = prefix ? "#{prefix}.#{key}" : key
         raise "The value of attribute '#{label}' is '#{value.inspect}' and this is not of the expected type #{type.inspect}" if type && !value.is_a?(type)
         value
