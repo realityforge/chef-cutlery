@@ -1,5 +1,6 @@
 ## 0.2.7:
 
+* Improve attribute handling so that the value can be false.
 * Add utility method RealityForge::SearchTools.search_and_deep_merge
   to merge a search result into a hash and return it.
 * Support a get_attribute helper method on RealityForge::AttributeTools
