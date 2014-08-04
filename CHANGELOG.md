@@ -1,4 +1,4 @@
-## 0.2.7:
+## 0.2.8:
 
 * Improve attribute handling so that the value can be false.
 * Add utility method RealityForge::SearchTools.search_and_deep_merge
