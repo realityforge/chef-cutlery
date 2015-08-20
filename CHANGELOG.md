@@ -1,5 +1,8 @@
 ## 0.2.10:
 
+* Workaround for versions of chef with a bug in the data bag search.
+  Submitted by James Walker.
+
 ## 0.2.8:
 
 * Improve attribute handling so that the value can be false.
