@@ -37,7 +37,7 @@ class RealityForge #nodoc
       end
 
       # Workaround for versions of chef with a bug in the data bag search
-      def databag_search_prefix()
+      def databag_search_prefix
         if Chef::VERSION <= '11.16.2'
           'raw_data_'
         else
