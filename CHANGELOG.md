@@ -1,3 +1,5 @@
+## 0.2.12:
+
 ## 0.2.10:
 
 * Workaround for versions of chef with a bug in the data bag search.
