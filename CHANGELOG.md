@@ -1,5 +1,6 @@
 ## 0.2.10:
 
+* Fix service lookup so multiple services can have the same prefix by matching service name exactly.
 * Support an array of expected types in method RealityForge::AttributeTools.get_attribute
 
 ## 0.2.8:
