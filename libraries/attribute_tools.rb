@@ -64,7 +64,7 @@ class RealityForge #nodoc
         value = output_entry[key_parts.last]
         return nil if value.nil?
         label = prefix ? "#{prefix}.#{key}" : key
-        raise "The value of attribute '#{label}' is '#{value.inspect}' and this is not of the expected type #{type.inspect}" if type && !value.is_a?(type)
+        raise "The value of attribute '#{label}' is '#{value.inspect}' and this is not of the expected type #{type.inspect}" if type && !(type.is_a?(Array) ? type : [type]).any? { |t| value.is_a?(t) }
         value
       end
 
