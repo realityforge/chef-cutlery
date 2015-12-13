@@ -1,8 +1,13 @@
-## 0.2.10:
+## 0.2.12:
 
 * Add simplified mechanism for loading data bag item with some reasonable error handling.
 * Fix service lookup so multiple services can have the same prefix by matching service name exactly.
 * Support an array of expected types in method RealityForge::AttributeTools.get_attribute
+
+## 0.2.10:
+
+* Workaround for versions of chef with a bug in the data bag search.
+  Submitted by James Walker.
 
 ## 0.2.8:
 
