@@ -3,6 +3,8 @@
 * Remove deprecated code. Removed `libraries/attribute_blender.rb` and
   `libraries/attribute_checker.rb` and the method
 	`RealityForge::AttributeTools.set_attribute_on_node`.
+* Remove `libraries/notifying_action.rb` as it can be replaced with
+  Chef 11's `use_inline_resources` method.
 
 ## 0.2.10:
 
