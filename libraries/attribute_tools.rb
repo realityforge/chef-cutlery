@@ -81,17 +81,6 @@ class RealityForge #nodoc
         output_entry = key_parts[0...-1].inject(base) { |element, k| element[k] }
         output_entry[key_parts.last] = value
       end
-
-      # Set attribute value on node using a path.
-      #
-      # = Parameters
-      # * +node+:: The node into which the results will be set.
-      # * +key+:: The path on the node on which to set value.
-      # * +value+:: The value to set.
-      def set_attribute_on_node(node, key, value)
-        puts "WARNING: Invoking deprecated RealityForge::AttributeTools.set_attribute_on_node - use RealityForge::AttributeTools.set_attribute instead."
-        set_attribute(node, key, value)
-      end
     end
   end
 end

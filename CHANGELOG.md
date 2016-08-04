@@ -1,5 +1,9 @@
 ## 0.2.12:
 
+* Remove deprecated code. Removed `libraries/attribute_blender.rb` and
+  `libraries/attribute_checker.rb` and the method
+	`RealityForge::AttributeTools.set_attribute_on_node`.
+
 ## 0.2.10:
 
 * Workaround for versions of chef with a bug in the data bag search.
