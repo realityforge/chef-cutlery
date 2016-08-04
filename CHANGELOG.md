@@ -5,6 +5,9 @@
 	`RealityForge::AttributeTools.set_attribute_on_node`.
 * Remove `libraries/notifying_action.rb` as it can be replaced with
   Chef 11's `use_inline_resources` method.
+* Add simplified mechanism for loading data bag item with some reasonable error handling.
+* Fix service lookup so multiple services can have the same prefix by matching service name exactly.
+* Support an array of expected types in method RealityForge::AttributeTools.get_attribute
 
 ## 0.2.10:
 
