@@ -1,4 +1,4 @@
-## 0.2.13:
+## 0.3.0:
 
 * Remove partial_search cookbook dependency (Effectively removes support for clients before Chef 12.0)
 
