@@ -10,10 +10,6 @@ Cutlery is a cookbook containing a collection useful library code.
 
 *No platforms defined*
 
-## Cookbooks:
-
-* partial_search
-
 # Attributes
 
 *No attributes defined*

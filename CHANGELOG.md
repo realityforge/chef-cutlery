@@ -1,3 +1,7 @@
+## 0.3.0:
+
+* Remove partial_search cookbook dependency (Effectively removes support for clients before Chef 12.0)
+
 ## 0.2.12:
 
 * Remove deprecated code. Removed `libraries/attribute_blender.rb` and

@@ -15,9 +15,14 @@
 name             'cutlery'
 maintainer       'Peter Donald'
 maintainer_email 'peter@realityforge.org'
-license          'Apache 2.0'
+license          'Apache-2.0'
 description      'Cutlery is a cookbook containing a collection useful library code.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.2.11'
+version          '0.3.0'
 
-depends 'partial_search'
+issues_url 'https://github.com/realityforge/chef-cutlery/pulls'
+source_url 'https://github.com/realityforge/chef-cutlery'
+chef_version '>= 12.0' if respond_to?(:chef_version)
+
+supports debian
+supports ubuntu
