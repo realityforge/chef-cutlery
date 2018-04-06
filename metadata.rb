@@ -24,5 +24,5 @@ issues_url 'https://github.com/realityforge/chef-cutlery/pulls'
 source_url 'https://github.com/realityforge/chef-cutlery'
 chef_version '>= 12.0' if respond_to?(:chef_version)
 
-supports debian
-supports ubuntu
+supports 'debian'
+supports 'ubuntu'
