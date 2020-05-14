@@ -1,6 +1,6 @@
 # Description
 
-[![Build Status](https://api.travis-ci.com/realityforge/chef-cutlery.svg?branch=master)](http://travis-ci.org/realityforge/chef-cutlery)
+[![Build Status](https://api.travis-ci.com/realityforge/chef-cutlery.svg?branch=master)](http://travis-ci.com/realityforge/chef-cutlery)
 
 Cutlery is a cookbook containing a collection useful library code.
 
